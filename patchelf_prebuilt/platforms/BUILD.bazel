@@ -1,0 +1,5 @@
+# defines a few shared Bazel platforms that we use when cross-compiling
+
+load(":platforms.bzl", "register_platforms")
+
+register_platforms()
