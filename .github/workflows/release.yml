@@ -12,7 +12,48 @@ permissions:
   contents: write
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: bazel-contrib/setup-bazel@0.8.5
+        with:
+          # Avoid downloading Bazel every time.
+          bazelisk-cache: true
+          # Store build cache per workflow.
+          disk-cache: ${{ github.workflow }}
+          # Share repository cache between workflows.
+          repository-cache: true
+          bazelrc: import %workspace%/.github/workflows/ci.bazelrc
+      - name: build binaries
+        run: bazel run //tools:current
+      - uses: actions/upload-artifact@v4
+        with:
+          name: artifacts
+          path: tools/prebuilt/current
+          retention-days: 1
+
   release:
-    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v6
-    with:
-      release_files: rules_patchelf_prebuilt-*.tar.gz
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Fetch the built artifacts from build jobs above and extract into
+      # ${GITHUB_WORKSPACE}/tools/prebuilt/current/*
+      - uses: actions/download-artifact@v4
+
+      - name: Prepare release
+        run: .github/workflows/release_prep.sh > release_notes.txt
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          # Use GH feature to populate the changelog automatically
+          generate_release_notes: true
+          body_path: release_notes.txt
+          files: |
+            tools/prebuilt/current/*
+            rules_patchelf_prebuilt-*.tar.gz
+          fail_on_unmatched_files: true

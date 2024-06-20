@@ -1,0 +1,3 @@
+load(":build.bzl", "register_all_tools")
+
+register_all_tools(name = "current")
