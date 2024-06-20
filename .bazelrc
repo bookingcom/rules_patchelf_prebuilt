@@ -22,7 +22,6 @@ common:darwin-arm64 --platforms=//patchelf_prebuilt/platforms:darwin-arm64
 common:windows-amd64 --platforms=//patchelf_prebuilt/platforms:windows-amd64
 common:windows-arm64 --platforms=//patchelf_prebuilt/platforms:windows-arm64
 
-
 # Load any settings specific to the current user.
 # .bazelrc.user should appear in .gitignore so that settings are not shared with team members
 # This needs to be last statement in this
