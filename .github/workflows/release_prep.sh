@@ -10,6 +10,7 @@ TAG=${GITHUB_REF_NAME}
 # with minimal differences in their code (e.g. strip_prefix remains the same)
 PREFIX="rules_patchelf_prebuilt-${TAG:1}"
 ARCHIVE="rules_patchelf_prebuilt-$TAG.tar.gz"
+ARCHIVE_TMP=$(mktemp)
 
 # NB: configuration for 'git archive' is in /.gitattributes
 git archive --format=tar --prefix=${PREFIX}/ ${TAG} > $ARCHIVE_TMP
