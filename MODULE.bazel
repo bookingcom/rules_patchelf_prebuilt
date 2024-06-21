@@ -15,7 +15,7 @@ bazel_dep(name = "aspect_bazel_lib", version = "2.7.7", dev_dependency = True)
 bazel_dep(name = "buildifier_prebuilt", version = "6.4.0", dev_dependency = True)
 
 patchelf_prebuilt = use_extension("//patchelf_prebuilt:extensions.bzl", "patchelf_prebuilt")
-patchelf_prebuilt.toolchain(patchelf_prebuilt_version = "1.14.2")
+patchelf_prebuilt.toolchain()
 use_repo(patchelf_prebuilt, "patchelf_prebuilt_toolchains")
 
 register_toolchains("@patchelf_prebuilt_toolchains//:all")

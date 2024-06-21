@@ -11,6 +11,7 @@ effectively overriding the default named toolchain due to toolchain resolution p
 """
 
 load(":repositories.bzl", "patchelf_prebuilt_register_toolchains")
+load(":version.bzl", "VERSION")
 
 _DEFAULT_NAME = "patchelf_prebuilt"
 
@@ -19,8 +20,17 @@ patchelf_prebuilt_toolchain = tag_class(attrs = {
 Base name for generated repositories, allowing more than one patchelf_prebuilt toolchain to be registered.
 Overriding the default is only permitted in the root module.
 """, default = _DEFAULT_NAME),
-    "patchelf_prebuilt_version": attr.string(doc = "Explicit version of patchelf_prebuilt.", mandatory = True),
+    "patchelf_prebuilt_version": attr.string(doc = "Explicit version of patchelf_prebuilt.", default = VERSION),
 })
+
+def _deduplicate(input):
+    out = []
+    seen = {}
+    for x in input:
+        if x not in seen:
+            out.append(x)
+            seen[x] = True
+    return out
 
 def _toolchain_extension(module_ctx):
     registrations = {}
@@ -35,6 +45,7 @@ def _toolchain_extension(module_ctx):
                 registrations[toolchain.name] = []
             registrations[toolchain.name].append(toolchain.patchelf_prebuilt_version)
     for name, versions in registrations.items():
+        versions = _deduplicate(versions)
         if len(versions) > 1:
             # TODO: should be semver-aware, using MVS
             selected = sorted(versions, reverse = True)[0]
