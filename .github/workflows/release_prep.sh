@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -o errexit -o nounset -o pipefail
+set -x
 
 # Set by GH actions, see
 # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
@@ -24,7 +25,7 @@ tar --file $ARCHIVE_TMP --delete ${PREFIX}/patchelf_prebuilt/private/integrity.b
 
 # Add trailing newlines to sha256 files. They were built with
 # https://github.com/aspect-build/bazel-lib/blob/main/tools/release/hashes.bzl
-for sha in $(ls artifacts-*/*.sha256); do
+for sha in $(ls tools/prebuilt/current/*.sha256); do
   echo "" >> $sha
 done
 
