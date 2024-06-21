@@ -23,21 +23,17 @@ git archive --format=tar --prefix=${PREFIX}/ ${TAG} > $ARCHIVE_TMP
 # Delete the placeholder file
 tar --file $ARCHIVE_TMP --delete ${PREFIX}/patchelf_prebuilt/private/integrity.bzl
 
-# Add trailing newlines to sha256 files. They were built with
-# https://github.com/aspect-build/bazel-lib/blob/main/tools/release/hashes.bzl
-for sha in $(ls tools/prebuilt/current/*.sha256); do
-  echo "" >> $sha
-done
+INTEGRITY=$(jq \
+  --from-file .github/workflows/integrity.jq \
+  --slurp \
+  --raw-input tools/prebuilt/current/*.sha256 \
+)
 
 mkdir -p ${PREFIX}/patchelf_prebuilt/private
 cat >${PREFIX}/patchelf_prebuilt/private/integrity.bzl <<EOF
 "Generated during release by release_prep.sh, using integrity.jq"
 
-RELEASED_BINARY_INTEGRITY = $(jq \
-  --from-file .github/workflows/integrity.jq \
-  --slurp \
-  --raw-input tools/prebuilt/current/*.sha256 \
-)
+RELEASED_BINARY_INTEGRITY = ${INTEGRITY}
 EOF
 
 tar --file $ARCHIVE_TMP --append ${PREFIX}/patchelf_prebuilt/private/integrity.bzl
