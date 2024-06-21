@@ -1,6 +1,7 @@
 "Creates repositories that can build patchelf for different versions from upstream"
 
-load("@//patchelf_prebuilt:repositories.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
+load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
 VERSIONS = {
     "0.14.5": {
@@ -8,6 +9,9 @@ VERSIONS = {
         "sha256": "b9a46f2989322eb89fa4f6237e20836c57b455aa43a32545ea093b431d982f5c",
     },
 }
+
+def http_archive(name, **kwargs):
+    maybe(_http_archive, name = name, **kwargs)
 
 def _patchelf_sources_extension(module_ctx):
     repos = []

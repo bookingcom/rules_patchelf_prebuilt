@@ -56,17 +56,5 @@ bazel_dep(name = "com_booking_rules_patchelf_prebuilt", version = "${TAG:1}")
 
 ## Using WORKSPACE
 
-Paste this snippet into your \`WORKSPACE.bazel\` file:
-
-\`\`\`starlark
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-http_archive(
-    name = "com_booking_rules_patchelf_prebuilt",
-    sha256 = "${SHA}",
-    strip_prefix = "${PREFIX}",
-    url = "https://github.com/bookingcom/rules_patchelf_prebuilt/releases/download/${TAG}/${ARCHIVE}",
-)
+WORKSPACE mode is not supported
 EOF
-
-awk 'f;/--SNIP--/{f=1}' e2e/smoke/WORKSPACE.bazel
-echo "\`\`\`"
