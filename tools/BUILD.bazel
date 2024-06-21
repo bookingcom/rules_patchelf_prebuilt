@@ -1,3 +1,26 @@
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 load(":build.bzl", "register_all_tools")
 
 register_all_tools(name = "current")
+
+bzl_library(
+    name = "build",
+    srcs = ["build.bzl"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":patchelf_sources",
+        "//patchelf_prebuilt:version",
+        "//patchelf_prebuilt/platforms",
+        "@aspect_bazel_lib//lib:copy_file",
+        "@aspect_bazel_lib//lib:transitions",
+        "@aspect_bazel_lib//lib:write_source_files",
+        "@aspect_bazel_lib//tools/release:hashes",
+    ],
+)
+
+bzl_library(
+    name = "patchelf_sources",
+    srcs = ["patchelf_sources.bzl"],
+    visibility = ["//visibility:public"],
+    deps = ["@//patchelf_prebuilt:repositories"],
+)

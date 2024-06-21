@@ -1,5 +1,13 @@
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+
 # defines a few shared Bazel platforms that we use when cross-compiling
 
 load(":platforms.bzl", "register_platforms")
 
 register_platforms()
+
+bzl_library(
+    name = "platforms",
+    srcs = ["platforms.bzl"],
+    visibility = ["//visibility:public"],
+)

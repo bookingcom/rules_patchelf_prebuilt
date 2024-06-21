@@ -17,3 +17,9 @@ bzl_library(
     srcs = ["resolved_toolchain.bzl"],
     visibility = ["//patchelf_prebuilt:__subpackages__"],
 )
+
+bzl_library(
+    name = "integrity",
+    srcs = ["integrity.bzl"],
+    visibility = ["//patchelf_prebuilt:__subpackages__"],
+)
