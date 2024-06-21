@@ -42,6 +42,8 @@ jobs:
       # Fetch the built artifacts from build jobs above and extract into
       # ${GITHUB_WORKSPACE}/tools/prebuilt/current/*
       - uses: actions/download-artifact@v4
+        with:
+          path: tools/prebuilt/current
 
       - name: Prepare release
         run: .github/workflows/release_prep.sh > release_notes.txt
