@@ -3,7 +3,14 @@ Add a basic smoke-test target below.
 """
 
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-# load("@com_booking_rules_patchelf_prebuilt//patchelf_prebuilt:defs.bzl", "...")
+load("@com_booking_rules_patchelf_prebuilt//patchelf_prebuilt:patchelf_binary.bzl", "patchelf_binary")
+
+genrule(
+    name = "execute_patchelf",
+    srcs = [":patchelf"],
+    outs = ["empty.txt"],
+    cmd = "$(location :patchelf) --version > $@",
+)
 
 # Replace with a usage of your rule/macro
 filegroup(name = "empty")
@@ -12,6 +19,10 @@ build_test(
     name = "smoke_test",
     targets = [
         # targets you add above
-        ":empty",
+        ":execute_patchelf",
     ],
+)
+
+patchelf_binary(
+    name = "patchelf",
 )

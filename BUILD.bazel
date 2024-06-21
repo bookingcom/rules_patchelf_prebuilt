@@ -1,4 +1,5 @@
 load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
+load("//patchelf_prebuilt:patchelf_binary.bzl", "patchelf_binary")
 
 gazelle_binary(
     name = "gazelle_bin",
@@ -8,4 +9,8 @@ gazelle_binary(
 gazelle(
     name = "gazelle",
     gazelle = "gazelle_bin",
+)
+
+patchelf_binary(
+    name = "patchelf",
 )
