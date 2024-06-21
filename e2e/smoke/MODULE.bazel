@@ -5,3 +5,11 @@ local_path_override(
     module_name = "com_booking_rules_patchelf_prebuilt",
     path = "../..",
 )
+
+patchelf_prebuilt = use_extension("@com_booking_rules_patchelf_prebuilt//patchelf_prebuilt:extensions.bzl", "patchelf_prebuilt")
+
+# TODO: whenever we release a new version this needs to be updated
+patchelf_prebuilt.toolchain(patchelf_prebuilt_version = "0.14.5")
+use_repo(patchelf_prebuilt, "patchelf_prebuilt_toolchains")
+
+register_toolchains("@patchelf_prebuilt_toolchains//:all")
