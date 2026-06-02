@@ -1,14 +1,9 @@
-load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
+load("@aspect_gazelle_prebuilt//:def.bzl", "aspect_gazelle")
 load("//patchelf_prebuilt:patchelf_binary.bzl", "patchelf_binary")
 
-gazelle_binary(
-    name = "gazelle_bin",
-    languages = ["@bazel_skylib_gazelle_plugin//bzl"],
-)
-
-gazelle(
+aspect_gazelle(
     name = "gazelle",
-    gazelle = "gazelle_bin",
+    languages = ["starlark"],
 )
 
 patchelf_binary(

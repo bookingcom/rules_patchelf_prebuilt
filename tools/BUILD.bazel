@@ -1,3 +1,6 @@
 load(":build.bzl", "register_all_tools")
 
+#gazelle:exclude build.bzl
+#gazelle:exclude patchelf_sources.bzl
+
 register_all_tools(name = "current")
