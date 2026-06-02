@@ -1,9 +1,9 @@
 "Helpers to build patchelf for different platforms"
 
-load("@aspect_bazel_lib//lib:copy_file.bzl", "copy_file")
-load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
-load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
-load("@aspect_bazel_lib//tools/release:hashes.bzl", "hashes")
+load("@bazel_lib//lib:copy_file.bzl", "copy_file")
+load("@bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
+load("@bazel_lib//lib:write_source_files.bzl", "write_source_files")
+load("@bazel_lib//tools/release:hashes.bzl", "hashes")
 load("//patchelf_prebuilt:version.bzl", "VERSION")
 load("//patchelf_prebuilt/platforms:platforms.bzl", "PLATFORMS")
 load(":patchelf_sources.bzl", "VERSIONS")

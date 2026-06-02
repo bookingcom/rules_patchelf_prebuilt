@@ -3,16 +3,15 @@
 module(
     name = "com_booking_rules_patchelf_prebuilt",
     version = "0.0.0",
-    compatibility_level = 1,
 )
 
-bazel_dep(name = "bazel_skylib", version = "1.7.1")
-bazel_dep(name = "platforms", version = "0.0.10")
+bazel_dep(name = "bazel_skylib", version = "1.9.0")
+bazel_dep(name = "platforms", version = "1.1.0")
 
-bazel_dep(name = "gazelle", version = "0.37.0", dev_dependency = True, repo_name = "bazel_gazelle")
-bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1", dev_dependency = True)
-bazel_dep(name = "aspect_bazel_lib", version = "2.7.7", dev_dependency = True)
-bazel_dep(name = "buildifier_prebuilt", version = "6.4.0", dev_dependency = True)
+bazel_dep(name = "gazelle", version = "0.51.0", dev_dependency = True)
+bazel_dep(name = "aspect_gazelle_prebuilt", version = "0.0.18", dev_dependency = True)
+bazel_dep(name = "bazel_lib", version = "3.3.1", dev_dependency = True)
+bazel_dep(name = "buildifier_prebuilt", version = "8.5.1.2", dev_dependency = True)
 
 patchelf_prebuilt = use_extension("//patchelf_prebuilt:extensions.bzl", "patchelf_prebuilt")
 patchelf_prebuilt.toolchain()
@@ -28,22 +27,10 @@ patchelf_sources = use_extension(
 patchelf_sources.register()
 use_repo(patchelf_sources, "patchelf_sources_v0.14.5")
 
-bazel_dep(name = "rules_cc", version = "0.0.9", dev_dependency = True)
-bazel_dep(name = "hermetic_cc_toolchain", version = "3.1.0", dev_dependency = True)
-
-toolchains = use_extension(
-    "@hermetic_cc_toolchain//toolchain:ext.bzl",
-    "toolchains",
-    dev_dependency = True,
-)
-use_repo(toolchains, "zig_sdk")
+bazel_dep(name = "rules_cc", version = "0.2.18", dev_dependency = True)
+bazel_dep(name = "llvm", version = "0.8.4", dev_dependency = True)
 
 register_toolchains(
-    "@zig_sdk//toolchain:linux_amd64_musl",
-    "@zig_sdk//toolchain:linux_arm64_musl",
-    "@zig_sdk//toolchain:darwin_amd64",
-    "@zig_sdk//toolchain:darwin_arm64",
-    "@zig_sdk//toolchain:windows_amd64",
-    "@zig_sdk//toolchain:windows_arm64",
+    "@llvm//toolchain:all",
     dev_dependency = True,
 )
