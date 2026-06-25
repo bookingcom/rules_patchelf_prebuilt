@@ -21,7 +21,7 @@ _ATTRS = {
 def _patchelf_prebuilt_repo_impl(repository_ctx):
     extension = ".exe" if "windows" in repository_ctx.attr.platform else ""
     filename = "patchelf-v{version}-{platform}{extension}".format(
-        version = repository_ctx.attr.patchelf_prebuilt_version.split("-", 1)[0],
+        version = repository_ctx.attr.patchelf_prebuilt_version.split("-", 1)[0].split(".bcr")[0],
         platform = repository_ctx.attr.platform,
         extension = extension,
     )
