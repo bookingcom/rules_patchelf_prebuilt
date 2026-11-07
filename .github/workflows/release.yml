@@ -27,7 +27,7 @@ jobs:
           bazelrc: import %workspace%/.github/workflows/ci.bazelrc
       - name: build binaries
         run: bazel run //tools:current
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: artifacts
           path: tools/prebuilt/current
@@ -41,7 +41,7 @@ jobs:
 
       # Fetch the built artifacts from build jobs above and extract into
       # ${GITHUB_WORKSPACE}/tools/prebuilt/current/*
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           path: tools/prebuilt/current
           merge-multiple: true
