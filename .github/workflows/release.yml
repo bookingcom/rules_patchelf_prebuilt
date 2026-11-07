@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: bazel-contrib/setup-bazel@0.19.1
         with:
           # Avoid downloading Bazel every time.
@@ -37,7 +37,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Fetch the built artifacts from build jobs above and extract into
       # ${GITHUB_WORKSPACE}/tools/prebuilt/current/*
