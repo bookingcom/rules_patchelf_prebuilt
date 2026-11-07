@@ -18,8 +18,14 @@ concurrency:
 
 jobs:
   test:
-    uses: bazel-contrib/.github/.github/workflows/bazel.yaml@v6
+    uses: bazel-contrib/.github/.github/workflows/bazel.yaml@v7
     with:
+      bazel_versions: |
+        [
+          "7.x",
+          "8.x",
+          "9.x"
+        ]
       folders: |
         [
           ".",
@@ -27,10 +33,13 @@ jobs:
         ]
       exclude: |
         [
-          {"bazelversion": "6.4.0", "os": "macos-latest"},
-          {"bazelversion": "6.4.0", "os": "windows-latest"},
-          {"bazelversion": "6.4.0", folder: "."},
-          { folder: ".", "os": "macos-latest"},
-          { folder: ".", "os": "windows-latest"},
-          { bzlmodEnabled: false}
+          {"bazelversion": "7.x", "os": "macos-latest"},
+          {"bazelversion": "7.x", "os": "windows-latest"},
+          {"bazelversion": "7.x", "folder": "."},
+          {"bazelversion": "8.x", "os": "macos-latest"},
+          {"bazelversion": "8.x", "os": "windows-latest"},
+          {"bazelversion": "8.x", "folder": "."},
+          {"folder": ".", "os": "macos-latest"},
+          {"folder": ".", "os": "windows-latest"},
+          {"bzlmodEnabled": false}
         ]
