@@ -6,6 +6,7 @@
 # https://bazel.build/reference/command-line-reference#flag--check_direct_dependencies
 # https://bazelbuild.slack.com/archives/C014RARENH0/p1691158021917459?thread_ts=1691156601.420349&cid=C014RARENH0
 common --check_direct_dependencies=off
+common --noenable_workspace
 
 build:linux --sandbox_add_mount_pair=/tmp
 build:macos --sandbox_add_mount_pair=/var/tmp
