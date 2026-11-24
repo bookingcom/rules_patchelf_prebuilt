@@ -25,7 +25,7 @@ patchelf_sources = use_extension(
     dev_dependency = True,
 )
 patchelf_sources.register()
-use_repo(patchelf_sources, "patchelf_sources_v0.14.5")
+use_repo(patchelf_sources, "patchelf_sources_v0.14.5", "patchelf_sources_v0.19.3")
 
 bazel_dep(name = "rules_cc", version = "0.2.18", dev_dependency = True)
 bazel_dep(name = "llvm", version = "0.8.4", dev_dependency = True)
