@@ -8,6 +8,10 @@ VERSIONS = {
         "url": "https://github.com/NixOS/patchelf/releases/download/0.14.5/patchelf-0.14.5.tar.bz2",
         "sha256": "b9a46f2989322eb89fa4f6237e20836c57b455aa43a32545ea093b431d982f5c",
     },
+    "0.19.3": {
+        "url": "https://github.com/NixOS/patchelf/releases/download/0.19.3/patchelf-0.19.3.tar.bz2",
+        "sha256": "20dbe23e9dbc4ad769078a867ad002c04297a069ff93c95fb72242dd55d4dd6f",
+    },
 }
 
 def http_archive(name, **kwargs):
