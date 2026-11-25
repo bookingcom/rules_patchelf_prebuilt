@@ -9,7 +9,7 @@ local_path_override(
 patchelf_prebuilt = use_extension("@com_booking_rules_patchelf_prebuilt//patchelf_prebuilt:extensions.bzl", "patchelf_prebuilt")
 
 # TODO: whenever we release a new version this needs to be updated
-patchelf_prebuilt.toolchain(patchelf_prebuilt_version = "0.14.5")
+patchelf_prebuilt.toolchain(patchelf_prebuilt_version = "0.19.3")
 use_repo(patchelf_prebuilt, "patchelf_prebuilt_toolchains")
 
 register_toolchains("@patchelf_prebuilt_toolchains//:all")
