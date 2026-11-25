@@ -22,8 +22,6 @@ jobs:
     with:
       bazel_versions: |
         [
-          "7.x",
-          "8.x",
           "9.x"
         ]
       folders: |
